@@ -1,0 +1,30 @@
+.app {
+	background: rgb(25, 49, 78);
+	color: rgb(220, 242, 249);
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	
+	button {
+		background: rgb(25, 49, 78);
+		color: rgb(145, 201, 229);
+		padding: 0.3em 0.8em;
+		border-radius: 0.5em;
+		cursor: pointer;
+
+		&:hover {
+			background: rgb(49, 96, 154);
+		}
+	}
+
+	h1 {
+		margin: 0;
+		text-align: center;
+	}
+
+	main {
+		background: rgb(35, 83, 142);
+		flex-grow: 1;
+		padding: 1rem;
+	}
+}

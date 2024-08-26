@@ -21,7 +21,7 @@ function App() {
 	return (
 		<div className="app">
 			<header>
-				<h1> Fullstack Pirates </h1>
+				<h1> 🏴‍☠️ Frontend Pirates 🏴‍☠️ </h1>
 			</header>
 			<main>
 				<button onClick={handleGet}> Arr mateys </button>
