@@ -4,18 +4,19 @@ import { Character, getPirates } from './data/getPirates'
 
 function App() {
 	const [characters, setCharacters] = useState<Character[]>([])
+	const [message, setMessage] = useState<string>('')
 	// TODO: lägg till filterfunktion (sök på namn)
 
 	const handleGet = async () => {
 		try {
 			const data: Character[] = await getPirates()
-			console.log('Data from API:', data)
+			// console.log('Data from API:', data)
 			setCharacters(data)
 		}
 		catch(error) {
 			const e: Error = error as Error
 			console.log('API failed with error: ', e.message)
-			// TODO: visa meddelande för användaren
+			setMessage('Something went wrong. Please try again later. Arrr!')
 		}
 	}
 	
@@ -26,9 +27,12 @@ function App() {
 			</header>
 			<main>
 				<button onClick={handleGet}> Arr mateys </button>
+				{message && (
+					<p> {message} </p>
+				)}
 				<div className="pirate-grid">
 					{characters.map((c: Character) => (
-						<section className="card">
+						<section key={c._id} className="card">
 							<p> {c.name} </p>
 							<img src={c.imageUrl} />
 						</section>
