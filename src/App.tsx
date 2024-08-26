@@ -5,7 +5,7 @@ import { Character, getPirates } from './data/getPirates'
 function App() {
 	const [characters, setCharacters] = useState<Character[]>([])
 	const [message, setMessage] = useState<string>('')
-	// TODO: lägg till filterfunktion (sök på namn)
+	const [searchFilter, setSearchFilter] = useState<string>('')
 
 	const handleGet = async () => {
 		try {
@@ -19,6 +19,9 @@ function App() {
 			setMessage('Something went wrong. Please try again later. Arrr!')
 		}
 	}
+	// Räknas ut baserat på characters och det användaren skrivit in i sökfältet
+	// Kan optimeras med useMemo
+	const filteredCharacters: Character[] = characters.filter(c => c.name.toLowerCase().includes(searchFilter.toLowerCase()))
 	
 	return (
 		<div className="app">
@@ -26,12 +29,16 @@ function App() {
 				<h1> 🏴‍☠️ Frontend Pirates 🏴‍☠️ </h1>
 			</header>
 			<main>
+				<input type="text" placeholder="Find characters"
+					onChange={(event) => setSearchFilter(event.target.value)}
+					value={searchFilter}
+					/>
 				<button onClick={handleGet}> Arr mateys </button>
 				{message && (
 					<p> {message} </p>
 				)}
 				<div className="pirate-grid">
-					{characters.map((c: Character) => (
+					{filteredCharacters.map((c: Character) => (
 						<section key={c._id} className="card">
 							<p> {c.name} </p>
 							<img src={c.imageUrl} />
