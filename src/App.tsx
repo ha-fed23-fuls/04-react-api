@@ -1,15 +1,16 @@
-// qimport { useState } from 'react'
+import { useState } from 'react'
 import './App.css'
-import { getPirates } from './data/getPirates'
+import { Character, getPirates } from './data/getPirates'
 
 function App() {
-	// const [characters, setCharacters] = useState<null | object>(null)
+	const [characters, setCharacters] = useState<Character[]>([])
+	// TODO: lägg till filterfunktion (sök på namn)
 
 	const handleGet = async () => {
 		try {
-			const data = await getPirates()
+			const data: Character[] = await getPirates()
 			console.log('Data from API:', data)
-			// TODO: visa datan i appen
+			setCharacters(data)
 		}
 		catch(error) {
 			const e: Error = error as Error
@@ -25,9 +26,18 @@ function App() {
 			</header>
 			<main>
 				<button onClick={handleGet}> Arr mateys </button>
+				<div className="pirate-grid">
+					{characters.map((c: Character) => (
+						<section className="card">
+							<p> {c.name} </p>
+							<img src={c.imageUrl} />
+						</section>
+					))}
+				</div>
 			</main>
 		</div>
 	)
 }
+// Higher order functions: map, filter, find, forEach
 
 export default App

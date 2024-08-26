@@ -1,14 +1,20 @@
 export interface ApiData {
-	// TODO: ta reda på vad som kommer från API:et
-	// och skriv färdigt interfacet
+	data: Character[];
+	info: object;   // vi behöver inte använda något som finns i "info"
+}
+export interface Character {
+	films: string[];
+	imageUrl: string;
+	name: string;
+	_id: number;
 }
 
-async function getPirates(): Promise<ApiData> {
-	const response: Response = await fetch('https://api.disneyapi.dev/character?films=Pirates of the Caribbean')
-	const data: ApiData = await response.json()
+async function getPirates(): Promise<Character[]> {
+	const response: Response = await fetch('https://api.disneyapi.dev/character?films=Pirates of the Caribbean&pageSize=100')
+	const apiData: ApiData = await response.json()
 	// Obs! Vi är inte garanterade att få "ApiData"
 	// på onsdag kommer vi att se hur vi kan validera datan
-	return data
+	return apiData.data
 }
 
 export { getPirates }
