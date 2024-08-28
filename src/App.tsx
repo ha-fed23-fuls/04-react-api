@@ -1,11 +1,10 @@
 import './App.css'
+import Header from './components/Header'
 import Main from './components/Main'
 
 const App = () => (
 	<div className="app">
-		<header>
-			<h1> 🏴‍☠️ Frontend Pirates 🏴‍☠️ </h1>
-		</header>
+		<Header />
 		<Main />
 	</div>
 )

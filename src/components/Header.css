@@ -1,0 +1,13 @@
+
+header {
+	display: flex;
+	flex-direction: row;
+
+	h1 {
+		flex-grow: 1;
+	}
+
+	p {
+		padding-right: 1em;
+	}
+}
