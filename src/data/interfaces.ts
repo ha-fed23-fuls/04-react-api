@@ -5,7 +5,7 @@ export interface ApiData {
 
 export interface Character {
 	films: string[];
-	imageUrl: string;
+	imageUrl?: string;
 	name: string;
 	_id: number;
 }

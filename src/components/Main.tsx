@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { getPirates } from '../data/getPirates'
 import { Character } from '../data/interfaces'
 import CharacterCard from './CharacterCard'
+import { validateCharacters } from '../data/validate'
 
 const Main = () => {
 	const [characters, setCharacters] = useState<Character[]>([])
@@ -10,9 +11,13 @@ const Main = () => {
 
 	const handleGet = async () => {
 		try {
-			const data: Character[] = await getPirates()
-			// console.log('Data from API:', data)
-			setCharacters(data)
+			const result = validateCharacters(await getPirates())
+			if( result.success ) {
+				// Vi använder "!" för att TypeScript ska strunta i den obefintliga möjligheten att det är undefined
+				setCharacters(result.value)
+			} else {
+				setMessage(result.error)
+			}
 		}
 		catch(error) {
 			const e: Error = error as Error
