@@ -1,13 +1,4 @@
-export interface ApiData {
-	data: Character[];
-	info: object;   // vi behöver inte använda något som finns i "info"
-}
-export interface Character {
-	films: string[];
-	imageUrl: string;
-	name: string;
-	_id: number;
-}
+import { Character, ApiData } from "./interfaces"
 
 async function getPirates(): Promise<Character[]> {
 	const response: Response = await fetch('https://api.disneyapi.dev/character?films=Pirates of the Caribbean&pageSize=100')
